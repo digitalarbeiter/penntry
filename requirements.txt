@@ -1,4 +1,4 @@
+click
 pygments
 requests
 sanic
-sqlite3
