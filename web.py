@@ -130,6 +130,7 @@ def event_list_item(event):
 
 
 def event_detail(event, siblings):
+    ctx = json.loads(event["context"])
     return f"""
         <article>
         <header><strong>{event["exc_repr"]}</strong> <small>in {escape(event["code_name"])} ({event["filename"]}:L{event["lineno"]})</small>
@@ -138,7 +139,7 @@ def event_detail(event, siblings):
         {"".join(format_frame(frame) for frame in reversed(json.loads(event["frames"])))}
         </article>
         <h3>Context</h3>
-        {locals_table(json.loads(event["context"]))}
+        {locals_table(ctx) if ctx else ""}
         {make_siblings(siblings)}
     """
 
